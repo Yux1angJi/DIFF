@@ -1,5 +1,5 @@
 # Extract Features from Diffusion Process
-# Implementation for DIFF for paper 'Diffusion Features to Bridge Domain Gap for Semantic Segmentation'
+# Implementation of DIFF for paper 'Diffusion Features to Bridge Domain Gap for Semantic Segmentation'
 # Based on HyperFeature
 # By Yuxiang Ji
 

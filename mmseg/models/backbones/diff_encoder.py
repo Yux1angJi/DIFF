@@ -1,5 +1,5 @@
 # DIFF Module
-# Implementation for DIFF of paper 'Diffusion Features to Bridge Domain Gap for Semantic Segmentation'
+# Implementation of DIFF for paper 'Diffusion Features to Bridge Domain Gap for Semantic Segmentation'
 # By Yuxiang Ji
 
 

@@ -1,6 +1,6 @@
 ## Diffusion Features to Bridge Domain Gap for Semantic Segmentation
 
-**by [Yuxiang Ji*](https://yux1angji.github.io/), Boyong He\*, [Chenyuan Qu](), Zhuoyue Tan, Chuan Qin, Liaoni Wu**
+**by [Yuxiang Ji*](https://yux1angji.github.io/), Boyong He\*, [Chenyuan Qu](https://chenyuanqu.com/), Zhuoyue Tan, Chuan Qin, Liaoni Wu**
 
 
 ## Overview

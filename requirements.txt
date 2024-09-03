@@ -16,9 +16,12 @@ PyYAML==5.4.1
 scipy==1.6.3
 seaborn==0.11.1
 timm==0.3.2
-torch==1.7.1+cu110
-torchvision==0.8.2+cu110
+torch==2.0.1+cu118
+torchvision==0.15.2+cu118
 tqdm==4.48.2
 typing-extensions==3.7.4.3
 wcwidth==0.2.5
 yapf==0.31.0
+diffusers==0.15.0
+transformers==4.26.1
+tokenizers==0.13.3
