@@ -1,0 +1,70 @@
+# Config File for DIFF of paper 'Diffusion Features to Bridge Domain Gap for Semantic Segmentation'
+# By Yuxiang Ji
+
+
+# projection_dim: [512, 512, 320, 128]
+# projection_dim_x4: 64
+# projection_dim: [768, 768, 384, 192]
+# projection_dim_x4: 96
+projection_dim: [2048, 2048, 1024, 512]
+projection_dim_x4: 256
+
+model_id: "/home/xmuairmud/jyx/stable-diffusion-2-1"
+
+aggregation_type: "direct_aggregation"
+
+diffusion_mode: "inversion"
+
+do_mask_steps: True
+do_one_step: False
+
+guidance_scale: 5.0
+eta: 1.0
+input_resolution: [512, 512] # H, W
+prompt: ""
+negative_prompt: ""
+
+# Subsample every 5 steps
+# scheduler_timesteps: [160, 139, 121, 105, 91, 80, 69, 60, 52, 45, 40, 34, 30, 26, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+# save_timestep: [33, 29, 25, 22, 18, 14, 11, 7, 3]
+# num_timesteps: 37
+
+# scheduler_timesteps: [100]
+# save_timestep: [0]
+# num_timesteps: 1
+
+scheduler_timesteps: [80, 60, 40, 20, 1]
+save_timestep: [4, 3, 2, 1, 0]
+num_timesteps: 5
+
+s_tmin: 10
+s_tmax: 250
+
+mask_min: -1
+mask_max: 1000
+
+idxs_resnet: [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [3, 0], [3, 1], [3, 2]]
+idxs_ca: [[1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [3, 0], [3, 1], [3, 2]]
+# idxs_ca: []
+
+### GTA
+label_map: 
+  # 0: 'A high quality photo; europe city; road, All types of roads, including lanes for vehicles'
+  1: 'A high quality photo; europe city; sidewalk, Paths for pedestrian use'
+  # 2: 'A high quality photo; europe city; building, Includes houses, shops, skyscrapers, and other types of buildings'
+  3: 'A high quality photo; europe city; wall, Outer walls of buildings or structures'
+  # 4: 'A high quality photo; europe city; fence, Structures used for enclosures, like metal fences, wooden fences'
+  # 5: 'A high quality photo; europe city; pole, Slender structures such as lamp posts, utility poles'
+  # 6: 'A high quality photo; europe city; traffic light, Lights used to control traffic flow'
+  # 7: 'A high quality photo; europe city; traffic sign, Signs indicating traffic rules, such as stop signs, speed limits'
+  # 8: 'A high quality photo; europe city; vegetation, Natural plants like trees, grass, bushes'
+  # 9: 'A high quality photo; europe city; terrain, Natural landforms like rocks, hills'
+  # 10: 'A high quality photo; europe city; sky, The part of the image representing the sky'
+  # 11: 'A high quality photo; europe city; person, Pedestrians, cyclists'
+  12: 'A high quality photo; europe city; rider, People riding bicycles, motorcycles'
+  # 13: 'A high quality photo; europe city; car, All types of four-wheeled vehicles, including sedans, trucks, buses'
+  14: 'A high quality photo; europe city; truck, Larger vehicles used for cargo transport'
+  # 15: 'A high quality photo; europe city; bus, Public transport vehicles'
+  16: 'A high quality photo; europe city; train, Vehicles on railway tracks'
+  # 17: 'A high quality photo; europe city; motorcycle, Includes motorcycles and scooters'
+  # 18: 'A high quality photo; europe city; bicycle, Includes all types of bicycles'

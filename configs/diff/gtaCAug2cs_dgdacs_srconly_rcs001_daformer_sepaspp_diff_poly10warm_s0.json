@@ -1,0 +1,69 @@
+{
+    "_base_": [
+        "../../_base_/default_runtime.py",
+        "../../_base_/models/daformer_sepaspp_diff.py",
+        "../../_base_/datasets/uda_gtaCAug_to_cityscapes_512x512.py",
+        "../../_base_/uda/dacs_srconly.py",
+        "../../_base_/schedules/adamw.py",
+        "../../_base_/schedules/poly10warm.py"
+    ],
+    "gpu_model": "NVIDIAGeForceRTXA6000",
+    "n_gpus": 1,
+    "seed": 0,
+    "model": {
+        "pretrained": null,
+        "backbone": {
+            "type": "DIFF"
+        },
+        "decode_head": {}
+    },
+    "data": {
+        "samples_per_gpu": 1,
+        "workers_per_gpu": 1,
+        "train": {
+            "type": "DGDataset",
+            "rare_class_sampling": {
+                "min_pixels": 3000,
+                "class_temp": 0.01,
+                "min_crop_ratio": 0.5
+            }
+        }
+    },
+    "optimizer_config": null,
+    "optimizer": {
+        "lr": 6e-05,
+        "paramwise_cfg": {
+            "custom_keys": {
+                "head": {
+                    "lr_mult": 10.0
+                },
+                "backbone.dift_model.aggregation_network.mixing_weights_stride": {
+                    "lr_mult": 10.0
+                }
+            }
+        }
+    },
+    "runner": {
+        "type": "IterBasedRunner",
+        "max_iters": 40000
+    },
+    "checkpoint_config": {
+        "by_epoch": false,
+        "interval": 10000,
+        "max_keep_ckpts": -1
+    },
+    "evaluation": {
+        "interval": 4000,
+        "metric": "mIoU"
+    },
+    "name": "240903_1411_gtaCAug2cs_dgdacs_srconly_rcs001_daformer_sepaspp_diff_poly10warm_s0_a5d73",
+    "exp": 50,
+    "name_dataset": "gtaCAug2cityscapes",
+    "name_architecture": "daformer_sepaspp_diff",
+    "name_encoder": "diff",
+    "name_decoder": "daformer_sepaspp",
+    "name_uda": "dgdacs_srconly_rcs0.01",
+    "name_opt": "adamw_6e-05_pmTrue_poly10warm_1x1_40k",
+    "work_dir": "work_dirs/local-exp50/240903_1411_gtaCAug2cs_dgdacs_srconly_rcs001_daformer_sepaspp_diff_poly10warm_s0_a5d73",
+    "git_rev": "c5f282df8500150302b1c27f8a26396969de5d4e"
+}
