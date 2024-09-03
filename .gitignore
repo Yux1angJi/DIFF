@@ -125,3 +125,5 @@ configs/generated/
 *.pgf
 
 */__pycache__/*
+
+*nohup*

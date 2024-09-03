@@ -15,7 +15,7 @@ Relying on diffusion-based encoder, our approach improves
 the previous state-of-the-art performance by 2.7 mIoU for GTA→Cityscapes,
 by 4.98 mIoU for GTA→ACDC, by 11.69 mIoU for GTA→Dark Zurich.
 
-![intro](resources/pipeline.pdf)
+![intro](resources/pipeline.jpg)
 
 [[arXiv]](https://arxiv.org/abs/2406.00777)
 
