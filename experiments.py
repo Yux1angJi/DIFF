@@ -88,67 +88,6 @@ def generate_experiment_cfgs(id):
             cfg['model']['decode_head']['norm_cfg'] = None
         cfg = update_decoder_in_channels(cfg, architecture_mod, backbone)
 
-        hrda_ablation_opts = None
-        outer_crop_size = sync_crop_size_mod \
-            if sync_crop_size_mod is not None \
-            else (int(crop.split('x')[0]), int(crop.split('x')[1]))
-        if 'hrda1' in architecture_mod:
-            o = [e for e in architecture_mod.split('_') if 'hrda' in e][0]
-            hr_crop_size = (int((o.split('-')[1])), int((o.split('-')[1])))
-            hr_loss_w = float(o.split('-')[2])
-            hrda_ablation_opts = o.split('-')[3:]
-            cfg['model']['type'] = 'HRDAEncoderDecoder'
-            cfg['model']['scales'] = [1, 0.5]
-            cfg['model'].setdefault('decode_head', {})
-            cfg['model']['decode_head']['single_scale_head'] = model_base_cfg[
-                'model']['decode_head']['type']
-            cfg['model']['decode_head']['type'] = 'HRDAHead'
-            cfg['model']['hr_crop_size'] = hr_crop_size
-            cfg['model']['feature_scale'] = 0.5
-            cfg['model']['crop_coord_divisible'] = 8
-            cfg['model']['hr_slide_inference'] = True
-            cfg['model']['decode_head']['attention_classwise'] = True
-            cfg['model']['decode_head']['hr_loss_weight'] = hr_loss_w
-            if outer_crop_size == hr_crop_size:
-                # If the hr crop is smaller than the lr crop (hr_crop_size <
-                # outer_crop_size), there is direct supervision for the lr
-                # prediction as it is not fused in the region without hr
-                # prediction. Therefore, there is no need for a separate
-                # lr_loss.
-                cfg['model']['decode_head']['lr_loss_weight'] = hr_loss_w
-                # If the hr crop covers the full lr crop region, calculating
-                # the FD loss on both scales stabilizes the training for
-                # difficult classes.
-                cfg['model']['feature_scale'] = 'all' if '_fd' in uda else 0.5
-
-        # HRDA Ablations
-        if hrda_ablation_opts is not None:
-            for o in hrda_ablation_opts:
-                if o == 'fixedatt':
-                    # Average the predictions from both scales instead of
-                    # learning a scale attention.
-                    cfg['model']['decode_head']['fixed_attention'] = 0.5
-                elif o == 'nooverlap':
-                    # Don't use overlapping slide inference for the hr
-                    # prediction.
-                    cfg['model']['hr_slide_overlapping'] = False
-                elif o == 'singleatt':
-                    # Use the same scale attention for all class channels.
-                    cfg['model']['decode_head']['attention_classwise'] = False
-                elif o == 'blurhr':
-                    # Use an upsampled lr crop (blurred) for the hr crop
-                    cfg['model']['blur_hr_crop'] = True
-                elif o == 'samescale':
-                    # Use the same scale/resolution for both crops.
-                    cfg['model']['scales'] = [1, 1]
-                    cfg['model']['feature_scale'] = 1
-                elif o[:2] == 'sc':
-                    cfg['model']['scales'] = [1, float(o[2:])]
-                    if not isinstance(cfg['model']['feature_scale'], str):
-                        cfg['model']['feature_scale'] = float(o[2:])
-                else:
-                    raise NotImplementedError(o)
-
         # Setup inference mode
         if inference_mod == 'whole' or crop == '2048x1024':
             assert model_base_cfg['model']['test_cfg']['mode'] == 'whole'
