@@ -19,6 +19,7 @@ by 4.98 mIoU for GTA→ACDC, by 11.69 mIoU for GTA→Dark Zurich.
 
 [[arXiv]](https://arxiv.org/abs/2406.00777)
 
+
 ## Setup Environment
 
 For this project, we used python 3.8.18. We recommend setting up a new virtual
@@ -42,6 +43,7 @@ Please refer to the instruction at [Stable-Diffusion](https://huggingface.co/sta
 
 All experiments were executed on a NVIDIA RTX A6000.
 
+
 ## Setup Datasets
 
 **Cityscapes:** Please, download leftImg8bit_trainvaltest.zip and
@@ -64,7 +66,9 @@ python run_experiments.py --exp 50
 ```
 
 More information about the available configuration and experiments, can be
-found in [stridehyperfeature.yaml](mmseg/models/backbones/diff/configs/stridehyperfeature.yaml).
+found in [diff_config.yaml](mmseg/models/backbones/diff/configs/diff_config.yaml).
+
+If you want to utilize DIFF module as a backbone for other tasks, you could simply copy the whole directory [mmseg/models/backbones/diff](mmseg/models/backbones/diff) and use `DIFFEncoder` in [here](mmseg/models/backbones/diff/src/models/diff.py).
 
 
 ## Acknowledgements
@@ -77,3 +81,17 @@ authors for making the source code publically available.
 * [Diffusion-HyperFeature](https://github.com/diffusion-hyperfeatures/diffusion_hyperfeatures)
 * [VPD](https://github.com/wl-zhao/VPD)
 
+
+## Citation
+If you find our work useful in your research, please consider citing:
+
+```
+@misc{ji2024diffusion,
+    title={Diffusion Features to Bridge Domain Gap for Semantic Segmentation},
+    author={Yuxiang Ji and Boyong He and Chenyuan Qu and Zhuoyue Tan and Chuan Qin and Liaoni Wu},
+    year={2024},
+    eprint={2406.00777},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+```

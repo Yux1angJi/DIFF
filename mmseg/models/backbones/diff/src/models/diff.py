@@ -74,7 +74,7 @@ def load_models_stride(config_path, device='cuda'):
 
 
 class DIFFEncoder(nn.Module):
-    def __init__(self, batch_size=2, mode="float", rank='cuda', config_related_path='../../configs/stridehyperfeature.yaml'):
+    def __init__(self, batch_size=2, mode="float", rank='cuda', config_related_path='../../configs/diff_config.yaml'):
         super().__init__()
         self.mode = mode
 

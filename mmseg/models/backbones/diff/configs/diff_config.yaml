@@ -9,44 +9,52 @@
 projection_dim: [2048, 2048, 1024, 512]
 projection_dim_x4: 256
 
+# Change for your sdv2-1 repo
 model_id: "/home/xmuairmud/jyx/stable-diffusion-2-1"
 
+# As default
 aggregation_type: "direct_aggregation"
-
 diffusion_mode: "inversion"
 
+# Do path-controlled diffusion as conditional branch in paper
 do_mask_steps: True
 do_one_step: False
 
+# As default
 guidance_scale: 5.0
 eta: 1.0
 input_resolution: [512, 512] # H, W
 prompt: ""
 negative_prompt: ""
 
+# As default for 37 steps
 # Subsample every 5 steps
-# scheduler_timesteps: [160, 139, 121, 105, 91, 80, 69, 60, 52, 45, 40, 34, 30, 26, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-# save_timestep: [33, 29, 25, 22, 18, 14, 11, 7, 3]
-# num_timesteps: 37
+# You could also change it for fewer steps for accelerating
+scheduler_timesteps: [160, 139, 121, 105, 91, 80, 69, 60, 52, 45, 40, 34, 30, 26, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+save_timestep: [33, 29, 25, 22, 18, 14, 11, 7, 3]
+num_timesteps: 37
 
 # scheduler_timesteps: [100]
 # save_timestep: [0]
 # num_timesteps: 1
 
-scheduler_timesteps: [80, 60, 40, 20, 1]
-save_timestep: [4, 3, 2, 1, 0]
-num_timesteps: 5
+# scheduler_timesteps: [80, 60, 40, 20, 1]
+# save_timestep: [4, 3, 2, 1, 0]
+# num_timesteps: 5
 
+# As default
 s_tmin: 10
 s_tmax: 250
-
 mask_min: -1
 mask_max: 1000
 
+# Blocks in UNet for extraction
+# resnet for intermediate-feature, ca for cross-attentino
 idxs_resnet: [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [3, 0], [3, 1], [3, 2]]
 idxs_ca: [[1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [3, 0], [3, 1], [3, 2]]
 # idxs_ca: []
 
+# Category prompt for path-controlled diffusion
 ### GTA
 label_map: 
   # 0: 'A high quality photo; europe city; road, All types of roads, including lanes for vehicles'

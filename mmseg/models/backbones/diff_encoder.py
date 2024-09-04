@@ -53,7 +53,7 @@ class DIFF(BaseModule):
         else:
             raise TypeError('pretrained must be a str or None')
 
-        config_related_path = '../../configs/stridehyperfeature.yaml'
+        config_related_path = '../../configs/diff_config.yaml'
         self.diff_model = DIFFEncoder(batch_size=batch_size, config_related_path=config_related_path)
 
     def forward(self, x, gt_semantic_seg=None):
